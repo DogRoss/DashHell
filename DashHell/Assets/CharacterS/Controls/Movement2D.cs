@@ -9,8 +9,6 @@ public class Movement2D : MonoBehaviour
     Rigidbody2D rb;
     Vector2 direction;
 
-    
-
     Vector2 lastDirection;
 
     float chargeMax = 100f;
@@ -28,23 +26,21 @@ public class Movement2D : MonoBehaviour
     }
 
 
+    private void OnPress(InputAction actionPress) //takes a input value and checks when pressed, how long it held, and when its released, and changes certain values based on that
+    {
+        //direction = value.Get<Vector2>();
+
+        if (actionPress == ) { }
+        if () { }
+        if () { }
+        if () { }
+    }
+
     private void OnMove(InputValue value) //takes a input value and checks when pressed, how long it held, and when its released, and changes certain values based on that
     {
-        direction = value.Get<Vector2>();        
-
-        Debug.Log(direction.x + " , " + direction.y);
-
-
-
+        direction = value.Get<Vector2>();
         
-        //while(direction == lastDirection)
-        //{
-        //    if (chargeValue < 100f)
-        //    {                   //check if max charge and adds to charge if held down
-        //        chargeValue += .2f;
-        //    }
-        //    
-        //}
+        
     }
 
     private void OnJump(InputValue value)
@@ -66,31 +62,16 @@ public class Movement2D : MonoBehaviour
         //Vector2.ClampMagnitude(rb.velocity, 1);
     }
 
-    private void IncrementUp(int switchCase)
-    {
-
-    }
-
-    private float UpdateTopValue() 
-    {
-
-        return 2f;
-    }
 
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
         if(direction.magnitude >= 0.95f) //stores direction as long as there is a directional input
         {
             lastDirection = direction;
         }
 
-        if(lastDirection == Vector2.down)
-        {
 
-        }
-
-        UpdateTopValue();
 
         //if(chargeValue > 0)
         //{
