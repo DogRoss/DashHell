@@ -41,9 +41,15 @@ public class Movement2D : MonoBehaviour
     //}
 
     private void OnMove(InputValue value) //takes a input value and checks when pressed, how long it held, and when its released, and changes certain values based on that
-    {
+    { //takes in Vector2
         direction.x = value.Get<Vector2>().x;
         direction.y = value.Get<Vector2>().y;
+
+        #region testAddStuff
+
+
+
+        #endregion
     }
 
     private void OnJump(InputValue value)
@@ -86,7 +92,7 @@ public class Movement2D : MonoBehaviour
     {
         chargeMultiplier.x = (chargeValueLeft + chargeValueRight);
 
-        chargeMultiplier.y (chargeValue);
+        chargeMultiplier.y = (chargeValueUp + chargeValueDown);
     }
 
     // Update is called once per frame
