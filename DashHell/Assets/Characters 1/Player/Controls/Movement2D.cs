@@ -10,18 +10,24 @@ public class Movement2D : MonoBehaviour
     Rigidbody2D rb;
     Vector2 direction;
 
+    float maxSpeed = 10;
+
+    //Vector2 decreaseByX = new Vector2(0.1f, 0);
+    //Vector2 decreaseByY = new Vector2(0, 0.1f);
+    //Vector2 zeroZero = new Vector2(0, 0);
+
     //InputAction actionHolder;
 
-    float chargeAddValue = 0.05f;
+    //float chargeAddValue = 0.05f;
+    //
+    //float chargeMax = 3f;
+    //
+    //float chargeValueUp = 1f;
+    //float chargeValueDown = 1f;
+    //float chargeValueLeft = 1f;
+    //float chargeValueRight = 1f;
 
-    float chargeMax = 3f;
-
-    float chargeValueUp = 1f;
-    float chargeValueDown = 1f;
-    float chargeValueLeft = 1f;
-    float chargeValueRight = 1f;
-
-    Vector2 chargeMultiplier = new Vector2(1, 1);
+    //Vector2 chargeMultiplier = new Vector2(1, 1);
     // Start is called before the first frame update
     void Start()
     {
@@ -44,12 +50,6 @@ public class Movement2D : MonoBehaviour
     { //takes in Vector2
         direction.x = value.Get<Vector2>().x;
         direction.y = value.Get<Vector2>().y;
-
-        #region testAddStuff
-
-
-
-        #endregion
     }
 
     private void OnJump(InputValue value)
@@ -65,12 +65,13 @@ public class Movement2D : MonoBehaviour
         if (direction.magnitude > 0f)
         {
             //rb.velocity = direction * 0.25f;
-            rb.velocity += (direction * chargeMultiplier);
+            rb.velocity += (direction * 10);
         }
 
         //Vector2.ClampMagnitude(rb.velocity, 1);
     }
-
+    
+    /*
     public void UpChange(Slider slider)
     {
         chargeValueUp = slider.value;
@@ -94,13 +95,33 @@ public class Movement2D : MonoBehaviour
 
         chargeMultiplier.y = (chargeValueUp + chargeValueDown);
     }
+    */
 
     // Update is called once per frame
     private void FixedUpdate()
     {
 
-        Debug.Log(direction.x + " , "+ direction.y);
+        if (rb.velocity.x >= maxSpeed)
+        {
+            rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
+        }
+        if(rb.velocity.x <= -maxSpeed)
+        {
+            rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
+        }
 
+        if (rb.velocity.y >= maxSpeed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, maxSpeed);
+        }
+        if (rb.velocity.y <= -maxSpeed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -maxSpeed);
+        }
+
+        //Debug.Log(direction.x + " , "+ direction.y);
+
+        /*
         if(chargeMultiplier.x <= 1f)
         {
             chargeMultiplier.x = 1;
@@ -112,6 +133,8 @@ public class Movement2D : MonoBehaviour
         }
 
         UpdateMultiplyingValue();
+        
+
 
         if(direction.y> 0.5f)                   //up
         { 
@@ -160,17 +183,17 @@ public class Movement2D : MonoBehaviour
                 chargeValueLeft = 3;
             }
         }
+        */
 
-        Debug.Log(chargeValueUp);
-    }
-
-
-    IEnumerator ChargeValue(float chargeValue)
-    {
+        //Debug.Log(chargeValueUp);
 
 
+        //if(rb.velocity.x >= zeroZero.x || rb.velocity.y >= zeroZero.y)
+        //{
+        //    rb.velocity -= decreaseByX;
+        //    rb.velocity -= decreaseByY;
+        //}
 
-        yield return null;
     }
 
 }
