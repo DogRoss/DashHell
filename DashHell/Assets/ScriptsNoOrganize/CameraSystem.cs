@@ -131,12 +131,9 @@ public class CameraSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(lensDistortionLayer.intensityX.value < playerObject.GetComponent<Rigidbody2D>().velocity.x)
-        {
-            
-        }
-        lensDistortionLayer.intensityX.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.x / 50);
-        lensDistortionLayer.intensityY.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.y / 50);
+
+        lensDistortionLayer.intensityX.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.x / 45);
+        lensDistortionLayer.intensityY.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.y / 45);
         //lensDistortionLayer.intensityX.value = Mathf.Lerp(Mathf.Abs());
         //lensDistortionLayer.intensityY.value = 1;
 

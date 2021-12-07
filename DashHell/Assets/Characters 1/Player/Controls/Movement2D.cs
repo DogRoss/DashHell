@@ -65,6 +65,8 @@ public class Movement2D : MonoBehaviour
     { //takes in Vector2
         direction.x = value.Get<Vector2>().x;
         direction.y = value.Get<Vector2>().y;
+
+        
     }
 
     /*
@@ -150,10 +152,10 @@ public class Movement2D : MonoBehaviour
             //direction.y = 1 * chargeValueLeft;
 
             //charge = new Vector2(chargeValueRight, chargeValueLeft); //makes new vector out of charge and applies
-            if(direction.magnitude > 0)
-            {
-                rb.velocity += direction * 10;
-            }
+            ////if(direction.magnitude > 0)
+            ////{
+            ////    rb.velocity += direction * 10;
+            ////}
             //rb.velocity += direction; //applies direction and charge to direction
             //rb.velocity += charge; //applies direction and charge to direction
 
@@ -271,6 +273,11 @@ public class Movement2D : MonoBehaviour
 
 
 
+
+        if (direction.magnitude > 0)
+        {
+            rb.velocity += direction * 2;
+        }
 
         //if(rb.velocity.x > 0)
         //{

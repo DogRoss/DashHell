@@ -11,9 +11,11 @@ public class PlayerEventController : MonoBehaviour
 
     Rigidbody2D rb;
 
-    public List<GameObject> effectedObjects = new List<GameObject>();
+    public List<GameObject> effectedObjects = new List<GameObject>(); //effected items will always be setactive(false)
 
-    public List<GameObject> causationObjects = new List<GameObject>();
+    public List<GameObject> causationObjects = new List<GameObject>();//causation items will always be setactive(true)
+
+    //public bool hasWon = false; //implenet for somethin ion know
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +24,22 @@ public class PlayerEventController : MonoBehaviour
         //setRespawn.position = startSpawn.transform.position; //spawnpoint set
         this.transform.position = startSpawn.transform.position; //spawnpoint set
 
+        foreach(GameObject causationObject in causationObjects)
+        {
+            causationObject.SetActive(true);
+        }
 
+        foreach (GameObject effectedObject in effectedObjects)
+        {
+            if (effectedObject.CompareTag("Finish"))
+            {
+                effectedObject.SetActive(false);
+            }
+            else
+            {
+                effectedObject.SetActive(true);
+            }
+        }
     }
 
     private void Triggered()
@@ -54,19 +71,24 @@ public class PlayerEventController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        //foreach (GameObject objectToDisable in causationObjects)
-        //{
-        //    if (objectToDisable.transform.position.x <= 3 && objectToDisable.transform.position.y <= 3)//to make sure i dont just disable every single trigger
-        //    {
-        //        objectToDisable.SetActive(false);
-        //    }
-        //        
-        //}
-
-        
-
         if (other.tag == "Damage")
         {
+            foreach (GameObject causationObject in causationObjects)
+            {
+                causationObject.SetActive(true);
+            }
+
+            foreach (GameObject effectedObject in effectedObjects)
+            {
+                if (effectedObject.CompareTag("Finish"))
+                {
+                    effectedObject.SetActive(false);
+                }
+                else
+                {
+                    effectedObject.SetActive(true);
+                }                               
+            }
             rb.velocity = new Vector2(0,0);
             this.transform.position = startSpawn.transform.position; //resets when player hits bad wall
         }
@@ -78,6 +100,7 @@ public class PlayerEventController : MonoBehaviour
 
         if (other.CompareTag("Finish")) //if the end goal was reached
         {
+            //hasWon = true;
             Finished();
         }
         //V-for future addons like powerups-V
