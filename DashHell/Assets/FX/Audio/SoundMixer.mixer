@@ -71,6 +71,8 @@ AudioMixerController:
     name: SFXVolume
   m_AudioMixerGroupViews:
   - guids:
+    - aa944ed9eaad4da4198778c97010f743
+    - 2670c3e3641df474bb102d276aa50f0c
     - a64a2eabeea0d4c45abe321a18c93d3c
     name: View
   m_CurrentViewIndex: 0

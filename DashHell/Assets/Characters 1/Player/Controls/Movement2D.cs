@@ -64,7 +64,7 @@ public class Movement2D : MonoBehaviour
         //}
         if (direction.magnitude > 0f)
         {
-            //rb.velocity = direction * 0.25f;
+            rb.velocity = direction * 0.25f;
             rb.velocity += (direction * 10);
         }
 

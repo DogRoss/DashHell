@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ChangeAudio : MonoBehaviour
 {
-
+    
     [SerializeField] AudioMixer audioMixer;
     //[SerializeField] AudioMixerGroup mainVolume;
     [SerializeField] Slider volumeSlider;
@@ -22,9 +22,11 @@ public class ChangeAudio : MonoBehaviour
 
         audioMixer.GetFloat("MusicVolume", out audioLevel);
         sfxSlider.value = audioLevel;
+        //volumeSlider.value = audioLevel;
 
         audioMixer.GetFloat("SFXVolume", out audioLevel);
         musicSlider.value = audioLevel;
+        //volumeSlider.value = audioLevel;
     }
 
     // Update is called once per frame
@@ -42,4 +44,49 @@ public class ChangeAudio : MonoBehaviour
     {
         audioMixer.SetFloat("MusicVolume", newLevel);
     }
+
+    /*
+    private AudioSource backgroundSound;
+    private static GameObject sound;
+    private float volumeValue = 1f;
+
+    void Start()
+    {
+        backgroundSound = GetComponent<AudioSource>();
+
+        DontDestroyOnLoad(this.gameObject);
+
+        if(sound == null)
+        {
+            sound = gameObject;
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+
+    }
+
+    void Update()
+    {
+        backgroundSound.volume = volumeValue;    
+    }
+
+    public void updateVolume(float volume)
+    {
+        volumeValue = volume;
+    }
+
+    public void updateMusic(float volume)
+    {
+        volumeValue = volume;
+    }
+
+    public void updateSFX(float volume)
+    {
+        volumeValue = volume;
+    }
+    */
 }

@@ -711,21 +711,20 @@ MonoBehaviour:
   m_FillRect: {fileID: 231532632}
   m_HandleRect: {fileID: 952403492}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 0.8
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 24100000, guid: 3c58a5dd96129434f8da35c7f3e78864, type: 2}
-        m_TargetAssemblyTypeName: UnityEditor.Audio.AudioMixerController, UnityEditor
-        m_MethodName: set_masterGroup
-        m_Mode: 2
+      - m_Target: {fileID: 2062628641}
+        m_TargetAssemblyTypeName: ChangeAudio, Assembly-CSharp
+        m_MethodName: UpdateSFX
+        m_Mode: 0
         m_Arguments:
-          m_ObjectArgument: {fileID: -175201270985954248, guid: 3c58a5dd96129434f8da35c7f3e78864, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEditor.Audio.AudioMixerGroupController,
-            UnityEditor
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1084,7 +1083,19 @@ MonoBehaviour:
   gameEvent: {fileID: 11400000, guid: 643f9698169fed44e940a1eb18ca9780, type: 2}
   thingToDo:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 322780219}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!4 &279372730
 Transform:
   m_ObjectHideFlags: 0
@@ -1149,7 +1160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3afb5cad9448f4e97847192b548be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 3c58a5dd96129434f8da35c7f3e78864, type: 2}
+  audioMixer: {fileID: 0}
   volumeSlider: {fileID: 0}
   sfxSlider: {fileID: 0}
   musicSlider: {fileID: 0}
@@ -1984,13 +1995,14 @@ GameObject:
   m_Component:
   - component: {fileID: 615576936}
   - component: {fileID: 615576935}
+  - component: {fileID: 615576937}
   m_Layer: 0
   m_Name: MenuSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &615576935
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2101,6 +2113,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &615576937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615576934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3afb5cad9448f4e97847192b548be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 0}
+  volumeSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
 --- !u!1 &641385408
 GameObject:
   m_ObjectHideFlags: 0
@@ -3026,21 +3054,111 @@ MonoBehaviour:
   m_FillRect: {fileID: 646181092}
   m_HandleRect: {fileID: 253701825}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0.8
+  m_MinValue: -80
+  m_MaxValue: 20
+  m_WholeNumbers: 1
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 24100000, guid: 3c58a5dd96129434f8da35c7f3e78864, type: 2}
-        m_TargetAssemblyTypeName: UnityEditor.Audio.AudioMixerController, UnityEditor
-        m_MethodName: set_masterGroup
-        m_Mode: 2
+      - m_Target: {fileID: 2062628641}
+        m_TargetAssemblyTypeName: ChangeAudio, Assembly-CSharp
+        m_MethodName: UpdateMusic
+        m_Mode: 0
         m_Arguments:
-          m_ObjectArgument: {fileID: 1441523001466967792, guid: 3c58a5dd96129434f8da35c7f3e78864, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEditor.Audio.AudioMixerGroupController,
-            UnityEditor
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &1131852244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131852246}
+  - component: {fileID: 1131852245}
+  - component: {fileID: 1131852247}
+  m_Layer: 0
+  m_Name: CheatDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1131852245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131852244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ccfb782a66d1ce1449e4e99935ac9b6a, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: ButtonSpecific
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!4 &1131852246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131852244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3, y: -0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1131852247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131852244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73410baf18940034d9abcf4bb32af14f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  code: 7500750064006400
+  entered: 0000000000000000
+  CheatActivatedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 643f9698169fed44e940a1eb18ca9780, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Announce
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3522,21 +3640,20 @@ MonoBehaviour:
   m_FillRect: {fileID: 604846903}
   m_HandleRect: {fileID: 2109069088}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 0.8
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 24100000, guid: 3c58a5dd96129434f8da35c7f3e78864, type: 2}
-        m_TargetAssemblyTypeName: UnityEditor.Audio.AudioMixerController, UnityEditor
-        m_MethodName: set_masterGroup
-        m_Mode: 2
+      - m_Target: {fileID: 2062628641}
+        m_TargetAssemblyTypeName: ChangeAudio, Assembly-CSharp
+        m_MethodName: UpdateAudio
+        m_Mode: 0
         m_Arguments:
-          m_ObjectArgument: {fileID: 24300002, guid: 3c58a5dd96129434f8da35c7f3e78864, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEditor.Audio.AudioMixerGroupController,
-            UnityEditor
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3807,13 +3924,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2036877903}
   - component: {fileID: 2036877902}
+  - component: {fileID: 2036877904}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &2036877902
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3924,6 +4042,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2036877904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036877901}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3afb5cad9448f4e97847192b548be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 3c58a5dd96129434f8da35c7f3e78864, type: 2}
+  volumeSlider: {fileID: 1279517057}
+  sfxSlider: {fileID: 108592039}
+  musicSlider: {fileID: 1107762895}
 --- !u!1 &2062628639
 GameObject:
   m_ObjectHideFlags: 0
