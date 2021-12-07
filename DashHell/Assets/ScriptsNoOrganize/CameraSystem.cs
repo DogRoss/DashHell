@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 
-public class CameraController : MonoBehaviour
+public class CameraSystem : MonoBehaviour
 {
     /*
     public GameObject playerObject;
@@ -85,13 +87,11 @@ public class CameraController : MonoBehaviour
     }
     */
 
+    public PostProcessVolume ppVolume;
+    LensDistortion lensDistortionLayer;
+    Bloom _bloom;
 
-
-    //Vector3 cameraPosition;
-
-    //Transform cameraTransform;
-
-    //private float TimeCount = 0.0f;
+    //FloatParameter floatPam;
 
     public GameObject cameraObject;
     public GameObject playerObject;
@@ -111,6 +111,14 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ppVolume.profile.TryGetSettings<LensDistortion>(out lensDistortionLayer);
+
+        //.profile.TryGetSettings(out _bloom);
+
+        lensDistortionLayer.intensityX.value = 0;
+        lensDistortionLayer.intensityY.value = 0;
+        //lensDistortionLayer.intensity = new FloatParameter();
+
 
 
         playerRB = playerObject.GetComponent<Rigidbody2D>();
@@ -123,6 +131,16 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(lensDistortionLayer.intensityX.value < playerObject.GetComponent<Rigidbody2D>().velocity.x)
+        {
+            
+        }
+        lensDistortionLayer.intensityX.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.x / 50);
+        lensDistortionLayer.intensityY.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.y / 50);
+        //lensDistortionLayer.intensityX.value = Mathf.Lerp(Mathf.Abs());
+        //lensDistortionLayer.intensityY.value = 1;
+
+
 
         //cameraObject.transform.rotation = Quaternion.Slerp(from.rotation, to.rotation, Time.time * speed);
         playerPos = new Vector3(playerObject.transform.position.x, playerObject.transform.position.y, -20);
