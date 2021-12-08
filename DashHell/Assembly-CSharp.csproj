@@ -66,7 +66,6 @@
     <Compile Include="Assets\WorldSpaceAssets\DamageCollider.cs" />
     <Compile Include="Assets\Characters 1\Player\Controls\ChargeController.cs" />
     <Compile Include="Assets\VariableReferences\FloatVariable.cs" />
-    <Compile Include="Assets\ScriptsNoOrganize\PlayerCameraLeadScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
@@ -120,6 +119,7 @@
     <Compile Include="Assets\Characters 1\Player\CharacterStats.cs" />
     <Compile Include="Assets\Cheats\ActivateCheatMenu.cs" />
     <Compile Include="Assets\Utilities\ActivateEvent.cs" />
+    <Compile Include="Assets\ScriptsNoOrganize\TitleCamera.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
