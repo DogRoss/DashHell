@@ -87,7 +87,7 @@ public class PlayerEventController : MonoBehaviour
             {
                 objectToTrigger.SetActive(true);
             }
-            else if (objectToTrigger.CompareTag("Finish")) //activates opening to next level
+            else if (objectToTrigger.CompareTag("Finish") || objectToTrigger.CompareTag("ToBeTriggered")) //activates opening to next level
             {
                 objectToTrigger.SetActive(true);
             }

@@ -9,6 +9,7 @@ TagManager:
   - Damage
   - Trigger
   - LevelResetter
+  - ToBeTriggered
   layers:
   - Default
   - TransparentFX
