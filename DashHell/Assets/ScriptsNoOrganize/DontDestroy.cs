@@ -1,14 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class DontDestroy : MonoBehaviour
 {
     public static bool isCheatsOn = false;
+    //public static GameObject optionsMenu;
+
+    public float masterVol;
+    public float musicVol;
+    public float sfxVol;
 
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(optionsMenu.gameObject);
     }
 
     public void SetBool(bool cheatState)
@@ -20,4 +28,20 @@ public class DontDestroy : MonoBehaviour
     {
         return isCheatsOn;
     }
+
+    public void SetMasterVol(Slider slider)
+    {
+        masterVol = slider.value;
+    }
+
+    public void SetMusicVol(Slider slider)
+    {
+        musicVol = slider.value;
+    }
+    public void SetSFXVol(Slider slider)
+    {
+        sfxVol = slider.value;
+    }
+
+
 }

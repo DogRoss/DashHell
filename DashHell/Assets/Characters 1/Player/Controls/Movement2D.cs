@@ -19,17 +19,20 @@ public class Movement2D : MonoBehaviour
 
     float maxSpeed = 50f;
 
+    bool isBraking = false;
 
     float chargeAddValue = .2f;
     
     float chargeMax = 20f;
-
+    
     Vector2 charge;
-
+    
     float chargeValueUp = 1f;
     float chargeValueDown = 1f;
     float chargeValueLeft = 1f;
     float chargeValueRight = 1f;
+
+
 
     
 
@@ -69,6 +72,25 @@ public class Movement2D : MonoBehaviour
         direction.y = value.Get<Vector2>().y;
 
         
+    }
+
+    private void OnPause()
+    {
+        Debug.Log("Paused");
+        Application.Quit();
+
+        
+        
+        /*
+        if(Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+        }
+        if(Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+        }
+        */
     }
 
     /*
@@ -139,37 +161,48 @@ public class Movement2D : MonoBehaviour
 
     }*/
 
+
     private void OnJump(InputValue value)
     {
-        if (direction.magnitude > 0f)
-        {
-            //for charge up(temp value of ten for all, change to 
-            chargeValueUp -= chargeValueDown;   //takes positive axis value charges (right, up) and subtracts negative axis value charges (down, left)
-            chargeValueRight -= chargeValueLeft;
-
-            //direction.x *= chargeValueRight; //this version you have to keep input to go in that direction
-            //direction.y *= chargeValueLeft;
-
-            //direction.x = 1 * chargeValueRight; //directly sets direction before applying
-            //direction.y = 1 * chargeValueLeft;
-
-            //charge = new Vector2(chargeValueRight, chargeValueLeft); //makes new vector out of charge and applies
-            ////if(direction.magnitude > 0)
-            ////{
-            ////    rb.velocity += direction * 10;
-            ////}
-            //rb.velocity += direction; //applies direction and charge to direction
-            //rb.velocity += charge; //applies direction and charge to direction
-
-            chargeValueUp = 0f; //resets charge value
-            chargeValueDown = 0f;
-            chargeValueLeft = 0f;
-            chargeValueRight = 0f;
-        }
+        //if (direction.magnitude > 0f)
+        //{
+        //    //for charge up(temp value of ten for all, change to 
+        //    chargeValueUp -= chargeValueDown;   //takes positive axis value charges (right, up) and subtracts negative axis value charges (down, left)
+        //    chargeValueRight -= chargeValueLeft;
+        //
+        //    //direction.x *= chargeValueRight; //this version you have to keep input to go in that direction
+        //    //direction.y *= chargeValueLeft;
+        //
+        //    //direction.x = 1 * chargeValueRight; //directly sets direction before applying
+        //    //direction.y = 1 * chargeValueLeft;
+        //
+        //    //charge = new Vector2(chargeValueRight, chargeValueLeft); //makes new vector out of charge and applies
+        //    if(direction.magnitude > 0)
+        //    {
+        //        rb.velocity += direction * 10;
+        //    }
+        //    //rb.velocity += direction; //applies direction and charge to direction
+        //    //rb.velocity += charge; //applies direction and charge to direction
+        //
+        //    chargeValueUp = 0f; //resets charge value
+        //    chargeValueDown = 0f;
+        //    chargeValueLeft = 0f;
+        //    chargeValueRight = 0f;
+        //}
+       //if (value.Get<bool>())
+       //{
+       //    isBraking = true;
+       //}
+       //else
+       //{
+       //    isBraking = false;
+       //}
+        
 
         //Vector2.ClampMagnitude(rb.velocity, 1);
     }
     
+
     /*
     public void UpChange(Slider slider)
     {
@@ -199,57 +232,57 @@ public class Movement2D : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (direction.y >= 0.1f) //facing up
-        {
-            if(chargeValueUp < chargeMax)
-            {
-                chargeValueUp += chargeAddValue;
-            }
-            else
-            {
-                chargeValueUp = chargeMax;
-            }
-            Debug.Log("accessedUp");
-        }
-
-        if (direction.y <= -0.1f) //facing down
-        {
-            if (chargeValueDown < chargeMax)
-            {
-                chargeValueDown += chargeAddValue;
-            }
-            else
-            {
-                chargeValueDown = chargeMax;
-            }
-            Debug.Log("accessedDown");
-        }
-
-        if (direction.x <= -0.1f) //facing left
-        {
-            if (chargeValueLeft < chargeMax)
-            {
-                chargeValueLeft += chargeAddValue;
-            }
-            else
-            {
-                chargeValueLeft = chargeMax;
-            }
-            Debug.Log("accessedLeft");
-        }
-
-        if (direction.x >= 0.1f) //facing right
-        {
-            if (chargeValueRight < chargeMax)
-            {
-                chargeValueRight += chargeAddValue;
-            }
-            else
-            {
-                chargeValueRight = chargeMax;
-            }
-            Debug.Log("accessedRight");
-        }
+        //if (direction.y >= 0.1f) //facing up
+        //{
+        //    if(chargeValueUp < chargeMax)
+        //    {
+        //        chargeValueUp += chargeAddValue;
+        //    }
+        //    else
+        //    {
+        //        chargeValueUp = chargeMax;
+        //    }
+        //    Debug.Log("accessedUp");
+        //}
+        //
+        //if (direction.y <= -0.1f) //facing down
+        //{
+        //    if (chargeValueDown < chargeMax)
+        //    {
+        //        chargeValueDown += chargeAddValue;
+        //    }
+        //    else
+        //    {
+        //        chargeValueDown = chargeMax;
+        //    }
+        //    Debug.Log("accessedDown");
+        //}
+        //
+        //if (direction.x <= -0.1f) //facing left
+        //{
+        //    if (chargeValueLeft < chargeMax)
+        //    {
+        //        chargeValueLeft += chargeAddValue;
+        //    }
+        //    else
+        //    {
+        //        chargeValueLeft = chargeMax;
+        //    }
+        //    Debug.Log("accessedLeft");
+        //}
+        //
+        //if (direction.x >= 0.1f) //facing right
+        //{
+        //    if (chargeValueRight < chargeMax)
+        //    {
+        //        chargeValueRight += chargeAddValue;
+        //    }
+        //    else
+        //    {
+        //        chargeValueRight = chargeMax;
+        //    }
+        //    Debug.Log("accessedRight");
+        //}
 
 
 
@@ -280,6 +313,29 @@ public class Movement2D : MonoBehaviour
         {
             rb.velocity += direction;
         }
+
+        //if (isBraking)
+        //{
+        //    if (rb.velocity.x > 0)
+        //    {
+        //
+        //        direction.x *= 0.9f;
+        //    }
+        //    if (rb.velocity.y > 0)
+        //    {
+        //        direction.y *= 0.9f;
+        //    }
+        //
+        //    if (rb.velocity.x < 0)
+        //    {
+        //        direction.x *= 0.9f;
+        //    }
+        //    if (rb.velocity.y < 0)
+        //    {
+        //        direction.x *= 0.9f;
+        //    }
+        //}
+
 
         //if(rb.velocity.x > 0)
         //{

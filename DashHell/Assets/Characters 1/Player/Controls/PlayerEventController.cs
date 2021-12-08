@@ -7,13 +7,11 @@ public class PlayerEventController : MonoBehaviour
 {
     public GameObject startSpawn;
 
-    //Transform setRespawn;
-
     Rigidbody2D rb;
 
     public List<GameObject> effectedObjects = new List<GameObject>(); //effected items will always be setactive(false)
-
     public List<GameObject> causationObjects = new List<GameObject>();//causation items will always be setactive(true)public bool cheatsOn = false;
+    int level = 0;
 
     public bool cheatsOn = false;
     GameObject passOverObject;
@@ -24,29 +22,44 @@ public class PlayerEventController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
 
-        passOverObject = GameObject.Find("PassOver");
-        dontDestroy = passOverObject.GetComponent<DontDestroy>();
-        cheatsOn = dontDestroy.ReturnCheatState();
+
+        rb = GetComponent<Rigidbody2D>();
+        if (GameObject.Find("PassOver"))
+        {
+            passOverObject = GameObject.Find("PassOver");
+            dontDestroy = passOverObject.GetComponent<DontDestroy>();
+            cheatsOn = dontDestroy.ReturnCheatState();
+        }
+        
 
         //setRespawn.position = startSpawn.transform.position; //spawnpoint set
         this.transform.position = startSpawn.transform.position; //spawnpoint set
 
         foreach(GameObject causationObject in causationObjects)
         {
-            causationObject.SetActive(true);
+            if (causationObject.CompareTag("LevelResetter")) //for resetting level
+            {
+                causationObject.SetActive(false);
+            }
+            else if (causationObject.CompareTag("Trigger")) //activates opening to next level
+            {
+                causationObject.SetActive(true);
+            }
+
+            
         }
 
-        foreach (GameObject effectedObject in effectedObjects)
+        //foreach (GameObject effectedObject in effectedObjects)
+        for (int i = 0; i < effectedObjects.Capacity; i++)
         {
-            if (effectedObject.CompareTag("Finish"))
+            if (effectedObjects[i].CompareTag("Finish") || effectedObjects[i].CompareTag("LevelResetter"))
             {
-                effectedObject.SetActive(false);
+                effectedObjects[i].SetActive(false);
             }
             else
             {
-                effectedObject.SetActive(true);
+                effectedObjects[i].SetActive(true);
             }
         }
     }
@@ -55,16 +68,30 @@ public class PlayerEventController : MonoBehaviour
     {
         causationObjects[0].SetActive(false);
 
+        //foreach (GameObject objectToTrigger in effectedObjects)
+        //{
+        //    if (objectToTrigger.activeSelf == true)
+        //    {
+        //        objectToTrigger.SetActive(false);
+        //    }
+        //    else
+        //    {
+        //        objectToTrigger.SetActive(true);
+        //    }
+        //
+        //}
+
         foreach (GameObject objectToTrigger in effectedObjects)
         {
-            if (objectToTrigger.activeSelf == true)
-            {
-                objectToTrigger.SetActive(false);
-            }
-            else
+            if (objectToTrigger.CompareTag("LevelResetter")) //for resetting level
             {
                 objectToTrigger.SetActive(true);
             }
+            else if (objectToTrigger.CompareTag("Finish")) //activates opening to next level
+            {
+                objectToTrigger.SetActive(true);
+            }
+
 
         }
     }
@@ -75,7 +102,10 @@ public class PlayerEventController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    
+    private void ResetLevel()
+    {
+        
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -114,6 +144,11 @@ public class PlayerEventController : MonoBehaviour
         {
             //hasWon = true;
             Finished();
+        }
+
+        if (other.CompareTag("LevelResetter"))
+        {
+            ResetLevel();
         }
         //V-for future addons like powerups-V
     }

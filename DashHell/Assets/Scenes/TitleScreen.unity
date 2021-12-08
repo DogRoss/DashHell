@@ -5897,7 +5897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &538475401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12760,6 +12760,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf36c16cc10f53046a521c4b66013419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVol: 0
+  musicVol: 0
+  sfxVol: 0
 --- !u!4 &821721024
 Transform:
   m_ObjectHideFlags: 0
@@ -16555,12 +16558,12 @@ GameObject:
   - component: {fileID: 1289512882}
   - component: {fileID: 1289512881}
   m_Layer: 5
-  m_Name: StartButton (1)
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1289512880
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17139,7 +17142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 345, y: -363}
+  m_AnchoredPosition: {x: 345, y: -286}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1419451904
@@ -20659,6 +20662,7 @@ MonoBehaviour:
   volumeSlider: {fileID: 1279517057}
   sfxSlider: {fileID: 108592039}
   musicSlider: {fileID: 1107762895}
+  dontDestroy: {fileID: 0}
 --- !u!1 &2051819208
 GameObject:
   m_ObjectHideFlags: 0
@@ -20894,7 +20898,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062628639}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a3afb5cad9448f4e97847192b548be8, type: 3}
   m_Name: 
@@ -20903,6 +20907,7 @@ MonoBehaviour:
   volumeSlider: {fileID: 1279517057}
   sfxSlider: {fileID: 108592039}
   musicSlider: {fileID: 1107762895}
+  dontDestroy: {fileID: 821721023}
 --- !u!1 &2067548714
 GameObject:
   m_ObjectHideFlags: 0

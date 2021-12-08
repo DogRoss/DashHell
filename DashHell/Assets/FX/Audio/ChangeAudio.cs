@@ -13,36 +13,59 @@ public class ChangeAudio : MonoBehaviour
     [SerializeField] Slider sfxSlider;
     [SerializeField] Slider musicSlider;
 
+    //public GameObject passOverObj;
+
+    public DontDestroy dontDestroy;
+
+    //public GameObject musicObj;
+
     void OnEnable() //set slider value to value of mainVolue
     {
+
+        //dontDestroy = passOverObj.GetComponent<DontDestroy>();
+
         float audioLevel; //temp holder for values;
 
         audioMixer.GetFloat("MasterVolume", out audioLevel);
         volumeSlider.value = audioLevel;
+        
 
         audioMixer.GetFloat("MusicVolume", out audioLevel);
         sfxSlider.value = audioLevel;
+        
         //volumeSlider.value = audioLevel;
 
         audioMixer.GetFloat("SFXVolume", out audioLevel);
         musicSlider.value = audioLevel;
+
         //volumeSlider.value = audioLevel;
+
+        //DontDestroyOnLoad(musicObj);
+        //DontDestroyOnLoad(musicObj);
+
+        dontDestroy.SetMasterVol(volumeSlider);
+        dontDestroy.SetMusicVol(musicSlider);
+        dontDestroy.SetSFXVol(sfxSlider);
+
     }
 
     // Update is called once per frame
     public void UpdateAudio(float newLevel)
     {
         audioMixer.SetFloat("MasterVolume", newLevel);
+        dontDestroy.SetMasterVol(volumeSlider);
     }
 
     public void UpdateSFX(float newLevel)
     {
         audioMixer.SetFloat("SFXVolume", newLevel);
+        dontDestroy.SetSFXVol(sfxSlider);
     }
 
     public void UpdateMusic(float newLevel)
     {
         audioMixer.SetFloat("MusicVolume", newLevel);
+        dontDestroy.SetMusicVol(musicSlider);
     }
 
     /*
