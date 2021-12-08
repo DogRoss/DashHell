@@ -31,6 +31,8 @@ public class Movement2D : MonoBehaviour
     float chargeValueLeft = 1f;
     float chargeValueRight = 1f;
 
+    
+
     //Vector2 chargeMultiplier = new Vector2(1, 1);
     // Start is called before the first frame update
     void Start()
@@ -276,7 +278,7 @@ public class Movement2D : MonoBehaviour
 
         if (direction.magnitude > 0)
         {
-            rb.velocity += direction * 2;
+            rb.velocity += direction;
         }
 
         //if(rb.velocity.x > 0)

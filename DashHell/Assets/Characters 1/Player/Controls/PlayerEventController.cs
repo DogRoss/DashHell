@@ -13,7 +13,11 @@ public class PlayerEventController : MonoBehaviour
 
     public List<GameObject> effectedObjects = new List<GameObject>(); //effected items will always be setactive(false)
 
-    public List<GameObject> causationObjects = new List<GameObject>();//causation items will always be setactive(true)
+    public List<GameObject> causationObjects = new List<GameObject>();//causation items will always be setactive(true)public bool cheatsOn = false;
+
+    public bool cheatsOn = false;
+    GameObject passOverObject;
+    DontDestroy dontDestroy;
 
     //public bool hasWon = false; //implenet for somethin ion know
 
@@ -21,6 +25,11 @@ public class PlayerEventController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        passOverObject = GameObject.Find("PassOver");
+        dontDestroy = passOverObject.GetComponent<DontDestroy>();
+        cheatsOn = dontDestroy.ReturnCheatState();
+
         //setRespawn.position = startSpawn.transform.position; //spawnpoint set
         this.transform.position = startSpawn.transform.position; //spawnpoint set
 
@@ -73,24 +82,27 @@ public class PlayerEventController : MonoBehaviour
 
         if (other.tag == "Damage")
         {
-            foreach (GameObject causationObject in causationObjects)
+            if (!cheatsOn)
             {
-                causationObject.SetActive(true);
-            }
-
-            foreach (GameObject effectedObject in effectedObjects)
-            {
-                if (effectedObject.CompareTag("Finish"))
+                foreach (GameObject causationObject in causationObjects)
                 {
-                    effectedObject.SetActive(false);
+                    causationObject.SetActive(true);
                 }
-                else
+
+                foreach (GameObject effectedObject in effectedObjects)
                 {
-                    effectedObject.SetActive(true);
-                }                               
+                    if (effectedObject.CompareTag("Finish"))
+                    {
+                        effectedObject.SetActive(false);
+                    }
+                    else
+                    {
+                        effectedObject.SetActive(true);
+                    }
+                }
+                rb.velocity = new Vector2(0, 0);
+                transform.position = startSpawn.transform.position; //resets when player hits bad wall
             }
-            rb.velocity = new Vector2(0,0);
-            this.transform.position = startSpawn.transform.position; //resets when player hits bad wall
         }
 
         if (other.CompareTag("Trigger")) //if its a regular trigger type

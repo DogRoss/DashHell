@@ -16,7 +16,7 @@ public class ActivateCheatMenu : MonoBehaviour
         temp[0] = c;
         for(int i = 1; i < entered.Length; i++)
         {
-            temp[i + 1] = entered[i];
+            temp[i] = entered[i - 1];
         }
         entered = temp;
 
