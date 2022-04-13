@@ -860,6 +860,7 @@ MonoBehaviour:
   causationObjects:
   - {fileID: 152068950}
   cheatsOn: 0
+  timer: {fileID: 1854877142}
 --- !u!82 &344561127
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1140,6 +1141,7 @@ MonoBehaviour:
   ppVolume: {fileID: 1867523907}
   ppProfile: {fileID: 0}
   lensDistortionLayer: {fileID: 0}
+  test: {fileID: 0}
   cameraObject: {fileID: 1867523903}
   playerObject: {fileID: 344561118}
   speed: 1
@@ -2635,6 +2637,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 970057961}
+  scoreText: {fileID: 1026966984}
+  score: 0
 --- !u!4 &1854877143
 Transform:
   m_ObjectHideFlags: 0

@@ -16,6 +16,8 @@ public class PlayerEventController : MonoBehaviour
     GameObject passOverObject;
     DontDestroy dontDestroy;
 
+    [SerializeField] Timer timer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +66,7 @@ public class PlayerEventController : MonoBehaviour
 
     private void Triggered()
     {
+        timer.ScoreUp();
         causationObjects[0].SetActive(false);
 
         foreach (GameObject objectToTrigger in effectedObjects)
@@ -76,8 +79,6 @@ public class PlayerEventController : MonoBehaviour
             {
                 objectToTrigger.SetActive(false);
             }
-
-
         }
     }
 
@@ -108,7 +109,10 @@ public class PlayerEventController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
+        if(other.tag == "Damage")
+        {
+            timer.ResetScore();
+        }
         if (other.tag == "Damage" || other.tag == "ToBeTriggered" && !cheatsOn)
         {
             foreach (GameObject causationObject in causationObjects)
