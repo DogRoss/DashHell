@@ -2,94 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering.Universal;
 
 public class CameraSystem : MonoBehaviour
 {
-    /*
-    public GameObject playerObject;
-    public Rigidbody2D playerRB;
 
-    public GameObject cameraObject;
-
-    Vector3 cameraPosition;
-
-    Transform cameraTransform;
-
-    private float TimeCount = 0.0f;
-
-    
-
-    //public GameObject cameraObject;
-
-    public int interpolationFrameCount = 45;
-    int elapsedFrames = 0;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //cameraObject = GetComponent<GameObject>();
-        //
-        ////cameraPosition = this.transform.position;
-        //cameraObject.transform.position = this.transform.position;
-        playerRB = playerObject.GetComponent<Rigidbody2D>();
-
-        cameraPosition.x = playerObject.transform.position.x;
-        cameraPosition.y = playerObject.transform.position.y;
-        cameraPosition.z = -20;
-
-        cameraObject.transform.position = cameraPosition;
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        cameraPosition = this.transform.position;
-
-        cameraPosition.x = playerObject.transform.position.x;
-        cameraPosition.y = playerObject.transform.position.y;
-        cameraPosition.z = -20;
-
-        cameraObject.transform.position = cameraPosition;
-
-        //this.transform.rotation = Quaternion.Euler(temp); //use this for rotation
-
-        if (playerRB.velocity.x >= .1f) //right rotate
-        {
-            //first, set rotation vector to go right
-
-            //float interpolationRatio = (float)elapsedFrames / interpolationFrameCount;
-
-            cameraObject.transform.rotation = Quaternion.Slerp(cameraTransform.rotation,(Quaternion.Euler(0, 10, 0)), rightTimeCount);
-            TimeCount += Time.deltaTime;
-
-
-
-            //Vector3 temp = new Vector3(0, 10, 0);
-            //this.transform.Rotate(Vector3.Lerp(this.transform.rotation, temp, ));
-            
-        }
-        //else //left rotate
-        //{
-        //
-        //}
-        //
-        //if (playerRB.velocity.y >= .1f) //up rotate
-        //{
-        //
-        //}
-        //else //down rotate
-        //{
-        //
-        //}
-
-    }
-    */
-
-    public PostProcessVolume ppVolume;
-    LensDistortion lensDistortionLayer;
-    Bloom _bloom;
+    public Volume ppVolume;
+    public VolumeProfile ppProfile;
+    //public PostProcessVolume ppVolume;
+    public LensDistortion lensDistortionLayer;
+    public Bloom test;
 
     //FloatParameter floatPam;
 
@@ -111,18 +33,9 @@ public class CameraSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ppVolume.profile.TryGetSettings<LensDistortion>(out lensDistortionLayer);
-
-        //.profile.TryGetSettings(out _bloom);
-
-        lensDistortionLayer.intensityX.value = 0;
-        lensDistortionLayer.intensityY.value = 0;
-        //lensDistortionLayer.intensity = new FloatParameter();
-
-
+        SetUpPP();
 
         playerRB = playerObject.GetComponent<Rigidbody2D>();
-
 
         playerPos = new Vector3(playerObject.transform.position.x, playerObject.transform.position.y, -20);
         cameraObject.transform.position = playerPos;
@@ -132,11 +45,10 @@ public class CameraSystem : MonoBehaviour
     void Update()
     {
 
-        lensDistortionLayer.intensityX.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.x / 45);
-        lensDistortionLayer.intensityY.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.y / 45);
+        lensDistortionLayer.xMultiplier.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.x / 45);
+        lensDistortionLayer.yMultiplier.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.y / 45);
         //lensDistortionLayer.intensityX.value = Mathf.Lerp(Mathf.Abs());
         //lensDistortionLayer.intensityY.value = 1;
-
 
 
         //cameraObject.transform.rotation = Quaternion.Slerp(from.rotation, to.rotation, Time.time * speed);
@@ -177,9 +89,15 @@ public class CameraSystem : MonoBehaviour
         }
 
         cameraObject.transform.rotation = Quaternion.Slerp(cameraObject.transform.rotation, Quaternion.Euler(rotationY, rotationX, rotationZ), Time.deltaTime * speed);
-        //Time.time * (speed)
+    }
 
+    void SetUpPP()
+    {
+        ppProfile = ppVolume.sharedProfile;
+        ppProfile.TryGet(out lensDistortionLayer);
 
-
+        lensDistortionLayer.xMultiplier.value = 0;
+        lensDistortionLayer.yMultiplier.value = 0;
+        //lensDistortionLayer.intensity = new FloatParameter();
     }
 }
