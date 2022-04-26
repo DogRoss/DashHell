@@ -10,8 +10,10 @@ public class Timer : MonoBehaviour
     public Text scoreText;
     private float secondsCount;
     public float score = 0;
+    bool stopTime = false;
     void Update()
     {
+        if (!stopTime)
         UpdateUI();
     }
     //call this on update
@@ -19,7 +21,7 @@ public class Timer : MonoBehaviour
     {
         //set timer UI
         secondsCount += Time.deltaTime;
-        timerText.text = secondsCount + "s";
+        timerText.text = secondsCount.ToString("F2") + "'s";
         scoreText.text = score.ToString();
     }
     
@@ -31,5 +33,10 @@ public class Timer : MonoBehaviour
     public void ResetScore()
     {
         score = 0;
+    }
+
+    public void StopTime()
+    {
+        stopTime = true;
     }
 }

@@ -9,6 +9,12 @@ public class PlayerEventController : MonoBehaviour
 
     Rigidbody2D rb;
 
+    [SerializeField]GameObject menuObject;
+    [SerializeField]GameObject scoreObject;
+    [SerializeField]GameObject timerObject;
+    [SerializeField] Timer timer;
+
+
     public List<GameObject> effectedObjects = new List<GameObject>(); //effected items will always be setactive(false)
     public List<GameObject> causationObjects = new List<GameObject>();//causation items will always be setactive(true)public bool cheatsOn = false;
 
@@ -16,13 +22,10 @@ public class PlayerEventController : MonoBehaviour
     GameObject passOverObject;
     DontDestroy dontDestroy;
 
-    [SerializeField] Timer timer;
-
-
     // Start is called before the first frame update
     void Start()
     {
-
+        menuObject.SetActive(false);
 
         rb = GetComponent<Rigidbody2D>();
         if (GameObject.Find("PassOver"))
@@ -46,8 +49,8 @@ public class PlayerEventController : MonoBehaviour
             {
                 causationObject.SetActive(true);
             }
-
             
+
         }
 
         //foreach (GameObject effectedObject in effectedObjects)
@@ -57,10 +60,15 @@ public class PlayerEventController : MonoBehaviour
             {
                 effectedObjects[i].SetActive(false);
             }
+            else if (effectedObjects[i].CompareTag("Gate"))
+            {
+                effectedObjects[i].SetActive(false);
+            }
             else
             {
                 effectedObjects[i].SetActive(true);
             }
+
         }
     }
 
@@ -79,6 +87,11 @@ public class PlayerEventController : MonoBehaviour
             {
                 objectToTrigger.SetActive(false);
             }
+
+            if (objectToTrigger.CompareTag("Gate"))
+            {
+                objectToTrigger.SetActive(true);
+            }
         }
     }
 
@@ -92,6 +105,8 @@ public class PlayerEventController : MonoBehaviour
         foreach (GameObject causationObject in causationObjects)
         {
             causationObject.SetActive(true);
+
+            
         }
 
         foreach (GameObject effectedObject in effectedObjects)
@@ -104,6 +119,11 @@ public class PlayerEventController : MonoBehaviour
             {
                 effectedObject.SetActive(true);
             }
+
+            if (effectedObject.CompareTag("Gate"))
+            {
+                effectedObject.SetActive(false);
+            }
         }
     }
 
@@ -113,16 +133,21 @@ public class PlayerEventController : MonoBehaviour
         {
             timer.ResetScore();
         }
-        if (other.tag == "Damage" || other.tag == "ToBeTriggered" && !cheatsOn)
+        if (other.tag == "Damage" || other.tag == "Gate" || other.tag == "ToBeTriggered" && !cheatsOn)
         {
             foreach (GameObject causationObject in causationObjects)
             {
                 causationObject.SetActive(true);
+
+                if (causationObject.CompareTag("Gate"))
+                {
+                    causationObject.SetActive(false);
+                }
             }
 
             foreach (GameObject effectedObject in effectedObjects)
             {
-                if (effectedObject.CompareTag("Finish") || effectedObject.CompareTag("LevelResetter"))
+                if (effectedObject.CompareTag("Finish") || effectedObject.CompareTag("LevelResetter") || effectedObject.CompareTag("Gate"))
                 {
                     effectedObject.SetActive(false);
                 }
@@ -131,8 +156,17 @@ public class PlayerEventController : MonoBehaviour
                     effectedObject.SetActive(true);
                 }
             }
-            rb.velocity = new Vector2(0, 0);
-            transform.position = startSpawn.transform.position; //resets when player hits bad wall
+
+            timer.StopTime();
+            menuObject.SetActive(true);
+            timerObject.transform.position = menuObject.transform.position + (Vector3.up * 200);
+            scoreObject.transform.position = menuObject.transform.position + (Vector3.up * 150);
+            
+
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+
+            //rb.velocity = new Vector2(0, 0);
+            //transform.position = startSpawn.transform.position; //resets when player hits bad wall
 
         }
 

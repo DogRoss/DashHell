@@ -17,6 +17,8 @@ public class Movement2D : MonoBehaviour
     InputActionAsset inputAsset;
     PlayerInput playerInput;
     [SerializeField]GameObject joystick;
+    public float multiplier = 1f;
+    float count = 0f;
 
     float maxSpeed = 50f;
 
@@ -56,12 +58,6 @@ public class Movement2D : MonoBehaviour
         
     }
 
-    private void OnPause()
-    {
-        Debug.Log("Paused");
-        Application.Quit();
-    }
-
 
     private void FixedUpdate()
     {
@@ -86,9 +82,22 @@ public class Movement2D : MonoBehaviour
 
         if (direction.magnitude > 0)
         {
-            rb.velocity += direction;
+            rb.velocity += direction * multiplier;
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trigger"))
+        {
+            multiplier += 0.5f;
+            count += 0.5f;
+        }
+        else
+        {
+            multiplier -= count;
+            count = 0;
+        }
     }
 
 }

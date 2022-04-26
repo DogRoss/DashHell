@@ -10,6 +10,8 @@ TagManager:
   - Trigger
   - LevelResetter
   - ToBeTriggered
+  - Gate
+  - Text
   layers:
   - Default
   - TransparentFX
