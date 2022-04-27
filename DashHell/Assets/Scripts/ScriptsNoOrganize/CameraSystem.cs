@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+/// <summary>
+/// handles the cameras movement and position in relation to player position and player input
+/// </summary>
 public class CameraSystem : MonoBehaviour
 {
     //post processing
@@ -85,7 +88,9 @@ public class CameraSystem : MonoBehaviour
         cameraObject.transform.rotation = Quaternion.Slerp(cameraObject.transform.rotation, Quaternion.Euler(rotationY, rotationX, rotationZ), Time.deltaTime * speed);
     }
 
-    //setup for post processing
+    /// <summary>
+    /// setup for post processing
+    /// </summary>
     void SetUpPP()
     {
         ppProfile = ppVolume.sharedProfile;

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
-//credits movement script
+/// <summary>
+/// handles sliding credits down
+/// </summary>
 public class MoveTextOverTime : MonoBehaviour
 {
     Animator animator;

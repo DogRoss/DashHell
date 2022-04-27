@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//timer and score for player gameplay
+
+/// <summary>
+/// timer and score for player gameplay
+/// </summary>
 public class Timer : MonoBehaviour
 {
     public Text timerText;
@@ -16,7 +19,10 @@ public class Timer : MonoBehaviour
         if (!stopTime)
         UpdateUI();
     }
-    //call this on update
+
+    /// <summary>
+    /// updates UI every frame
+    /// </summary>
     public void UpdateUI()
     {
         //set timer UI
@@ -25,6 +31,7 @@ public class Timer : MonoBehaviour
         scoreText.text = score.ToString();
     }
     
+
     public void ScoreUp()
     {
         score++;
@@ -35,6 +42,9 @@ public class Timer : MonoBehaviour
         score = 0;
     }
 
+    /// <summary>
+    /// stops in game timer
+    /// </summary>
     public void StopTime()
     {
         stopTime = true;

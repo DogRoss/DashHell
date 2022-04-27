@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// controls player related events like player collision interactions and level progression
+/// </summary>
 public class PlayerEventController : MonoBehaviour
 {
     public GameObject startSpawn;
@@ -77,7 +80,10 @@ public class PlayerEventController : MonoBehaviour
         }
     }
 
-    private void Triggered() //when the score trigger is hit, sets up the other part of the level
+    /// <summary>
+    /// when the score trigger is hit, sets up the other part of the level
+    /// </summary>
+    private void Triggered() 
     {
         timer.ScoreUp();
         causationObjects[0].SetActive(false);
@@ -104,12 +110,18 @@ public class PlayerEventController : MonoBehaviour
         }
     }
 
-    private void Finished() //if win, go to main menu
+    /// <summary>
+    /// win condition was true, returns to menu
+    /// </summary>
+    private void Finished()
     {
         SceneManager.LoadScene(0);
     }
 
-    private void ResetLevel() //resets level at runtime whilst contiuing said level
+    /// <summary>
+    /// resets level at runtime whilst contiuing said level timer
+    /// </summary>
+    private void ResetLevel()
     {
         foreach (GameObject causationObject in causationObjects)
         {

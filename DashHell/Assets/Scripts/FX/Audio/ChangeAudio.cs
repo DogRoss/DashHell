@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+/// <summary>
+/// changes audio noise level dependant on input
+/// </summary>
 public class ChangeAudio : MonoBehaviour
 {
     
@@ -12,11 +15,7 @@ public class ChangeAudio : MonoBehaviour
     [SerializeField] Slider sfxSlider;
     [SerializeField] Slider musicSlider;
 
-    //public GameObject passOverObj;
-
     public DontDestroy dontDestroy;
-
-    //public GameObject musicObj;
 
     void OnEnable() //set slider value to value of mainVolue
     {
@@ -40,7 +39,6 @@ public class ChangeAudio : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     public void UpdateAudio(float newLevel)
     {
         audioMixer.SetFloat("MasterVolume", newLevel);

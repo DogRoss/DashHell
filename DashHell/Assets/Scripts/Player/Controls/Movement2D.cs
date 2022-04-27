@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
+/// <summary>
+/// handles player movement
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement2D : MonoBehaviour
 {
@@ -27,6 +30,7 @@ public class Movement2D : MonoBehaviour
 #endif
         rb = GetComponent<Rigidbody2D>();
     }
+
 
     private void OnMove(InputValue value) //takes a input value and checks when pressed, how long it held, and when its released, and changes certain values based on that
     { //takes in Vector2
