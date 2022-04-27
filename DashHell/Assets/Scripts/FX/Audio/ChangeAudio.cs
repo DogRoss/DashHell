@@ -8,7 +8,6 @@ public class ChangeAudio : MonoBehaviour
 {
     
     [SerializeField] AudioMixer audioMixer;
-    //[SerializeField] AudioMixerGroup mainVolume;
     [SerializeField] Slider volumeSlider;
     [SerializeField] Slider sfxSlider;
     [SerializeField] Slider musicSlider;
@@ -22,26 +21,18 @@ public class ChangeAudio : MonoBehaviour
     void OnEnable() //set slider value to value of mainVolue
     {
 
-        //dontDestroy = passOverObj.GetComponent<DontDestroy>();
-
         float audioLevel; //temp holder for values;
 
+        //sets volumes to determined values
         audioMixer.GetFloat("MasterVolume", out audioLevel);
         volumeSlider.value = audioLevel;
         
 
         audioMixer.GetFloat("MusicVolume", out audioLevel);
         sfxSlider.value = audioLevel;
-        
-        //volumeSlider.value = audioLevel;
 
         audioMixer.GetFloat("SFXVolume", out audioLevel);
         musicSlider.value = audioLevel;
-
-        //volumeSlider.value = audioLevel;
-
-        //DontDestroyOnLoad(musicObj);
-        //DontDestroyOnLoad(musicObj);
 
         dontDestroy.SetMasterVol(volumeSlider);
         dontDestroy.SetMusicVol(musicSlider);
@@ -68,48 +59,5 @@ public class ChangeAudio : MonoBehaviour
         dontDestroy.SetMusicVol(musicSlider);
     }
 
-    /*
-    private AudioSource backgroundSound;
-    private static GameObject sound;
-    private float volumeValue = 1f;
-
-    void Start()
-    {
-        backgroundSound = GetComponent<AudioSource>();
-
-        DontDestroyOnLoad(this.gameObject);
-
-        if(sound == null)
-        {
-            sound = gameObject;
-
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-
-    }
-
-    void Update()
-    {
-        backgroundSound.volume = volumeValue;    
-    }
-
-    public void updateVolume(float volume)
-    {
-        volumeValue = volume;
-    }
-
-    public void updateMusic(float volume)
-    {
-        volumeValue = volume;
-    }
-
-    public void updateSFX(float volume)
-    {
-        volumeValue = volume;
-    }
-    */
+    
 }

@@ -8,45 +8,23 @@ using static UnityEngine.InputSystem.InputAction;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement2D : MonoBehaviour
 {
+    //movement values
     Rigidbody2D rb;
+    Vector2 rbVel = Vector2.zero;
     Vector2 direction;
-    Vector2 deacceleration = new Vector2(1,1);
-
-    InputAction input;
-    InputActionMap inputMap;
-    InputActionAsset inputAsset;
-    PlayerInput playerInput;
-    [SerializeField]GameObject joystick;
-    public float multiplier = 1f;
-    float count = 0f;
-
     float maxSpeed = 50f;
+    public float multiplier = 1f;
+    float count = 0f; //tracks how much speed multiplier has been gained
 
-    bool isBraking = false;
+    //input
+    [SerializeField]GameObject joystick;
 
-    float chargeAddValue = .2f;
-    
-    float chargeMax = 20f;
-    
-    Vector2 charge;
-    
-    float chargeValueUp = 1f;
-    float chargeValueDown = 1f;
-    float chargeValueLeft = 1f;
-    float chargeValueRight = 1f;
-
-
-
-    
-
-    //Vector2 chargeMultiplier = new Vector2(1, 1);
     // Start is called before the first frame update
     void Start()
     {
 #if UNITY_STANDALONE_WIN
         joystick.SetActive(false);
 #endif
-        playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -54,41 +32,29 @@ public class Movement2D : MonoBehaviour
     { //takes in Vector2
         direction.x = value.Get<Vector2>().x;
         direction.y = value.Get<Vector2>().y;
-
-        
     }
 
 
     private void FixedUpdate()
     {
+        rbVel = rb.velocity;//cache velocity
+        
+        if(rbVel.magnitude > maxSpeed) //check and control speed
+        {
+            rbVel = rbVel.normalized * maxSpeed;
+        }
+        rb.velocity = rbVel;
 
-        if (rb.velocity.x >= maxSpeed)
-        {
-            rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
-        }
-        if(rb.velocity.x <= -maxSpeed)
-        {
-            rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
-        }
-
-        if (rb.velocity.y >= maxSpeed)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, maxSpeed);
-        }
-        if (rb.velocity.y <= -maxSpeed)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, -maxSpeed);
-        }
-
-        if (direction.magnitude > 0)
+        if (direction.magnitude > 0) //if movin
         {
             rb.velocity += direction * multiplier;
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Trigger"))
+        if (collision.gameObject.CompareTag("Trigger")) //if the score collider was hit
         {
             multiplier += 0.5f;
             count += 0.5f;

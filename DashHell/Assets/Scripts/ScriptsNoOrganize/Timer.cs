@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+//timer and score for player gameplay
 public class Timer : MonoBehaviour
 {
     public Text timerText;

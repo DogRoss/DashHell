@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+//handles all objects that transfer scene by scene
 public class DontDestroy : MonoBehaviour
 {
     public static bool isCheatsOn = false;
@@ -19,6 +20,7 @@ public class DontDestroy : MonoBehaviour
         //DontDestroyOnLoad(optionsMenu.gameObject);
     }
 
+    //saves cheats
     public void SetBool(bool cheatState)
     {
         isCheatsOn = cheatState;

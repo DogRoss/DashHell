@@ -6,20 +6,18 @@ using UnityEngine.Rendering.Universal;
 
 public class CameraSystem : MonoBehaviour
 {
-
+    //post processing
     public Volume ppVolume;
     public VolumeProfile ppProfile;
-    //public PostProcessVolume ppVolume;
     public LensDistortion lensDistortionLayer;
     public Bloom test;
 
-    //FloatParameter floatPam;
-
+    //player
     public GameObject cameraObject;
     public GameObject playerObject;
     Vector3 playerPos;
-
     Rigidbody2D playerRB;
+    Vector3 playerVel = Vector3.zero;
 
     float rotationX;
     float rotationY;
@@ -44,20 +42,16 @@ public class CameraSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //changes lens distortion based on movement
+        playerVel = playerRB.velocity;
+        lensDistortionLayer.xMultiplier.value = Mathf.Abs(playerVel.x / 45);
+        lensDistortionLayer.yMultiplier.value = Mathf.Abs(playerVel.y / 45);
 
-        lensDistortionLayer.xMultiplier.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.x / 45);
-        lensDistortionLayer.yMultiplier.value = Mathf.Abs(playerObject.GetComponent<Rigidbody2D>().velocity.y / 45);
-        //lensDistortionLayer.intensityX.value = Mathf.Lerp(Mathf.Abs());
-        //lensDistortionLayer.intensityY.value = 1;
-
-
-        //cameraObject.transform.rotation = Quaternion.Slerp(from.rotation, to.rotation, Time.time * speed);
+        //tracks camera to player
         playerPos = new Vector3(playerObject.transform.position.x, playerObject.transform.position.y, -20);
         cameraObject.transform.position = playerPos;
 
-       // from.rotation = cameraObject.transform.rotation;
-
-        
+        //rotates camera dependant on input
         rotationX = playerRB.velocity.x;
         if (rotationX > 10) //rotates around y access (left right)
         {
@@ -91,6 +85,7 @@ public class CameraSystem : MonoBehaviour
         cameraObject.transform.rotation = Quaternion.Slerp(cameraObject.transform.rotation, Quaternion.Euler(rotationY, rotationX, rotationZ), Time.deltaTime * speed);
     }
 
+    //setup for post processing
     void SetUpPP()
     {
         ppProfile = ppVolume.sharedProfile;
@@ -98,6 +93,5 @@ public class CameraSystem : MonoBehaviour
 
         lensDistortionLayer.xMultiplier.value = 0;
         lensDistortionLayer.yMultiplier.value = 0;
-        //lensDistortionLayer.intensity = new FloatParameter();
     }
 }

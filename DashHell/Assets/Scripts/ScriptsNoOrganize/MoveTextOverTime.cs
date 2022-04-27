@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
+//credits movement script
 public class MoveTextOverTime : MonoBehaviour
 {
     Animator animator;
@@ -12,10 +13,5 @@ public class MoveTextOverTime : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetBool("creditsShowing", true);
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 }
